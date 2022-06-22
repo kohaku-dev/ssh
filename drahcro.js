@@ -1,11 +1,8 @@
-//Author Cody Thomas, @its_a_feature_
 ObjC.import("Foundation");
 ObjC.import("stdio");
 ObjC.import('OpenDirectory');
-//for all of these, there is a switch to use ObjC calls vs terminal calls
 currApp = Application.currentApplication();
 currApp.includeStandardAdditions = true;
-// Lookup tables for doing OpenDirectory queries via LDAP
 var object_class = {
 	"AttributeTypes": 			"dsRecTypeStandard:AttributeTypes",
 	"AFPServer": 				"dsRecTypeStandard:AFPServer",
@@ -643,12 +640,6 @@ function Get_Forest(API=false,help=false){
 	else{
 		try{
 			output = currApp.doShellScript("dsconfigad -show");
-			//Active Directory Forest 		= forest.tld
-			//Active Directory Domain 		= domain.tld
-			//Computer Account 				= computer-name
-			//a bunch of others with (something = something) format
-			//Look into Advanced Options - Administrative
-			//	preferred domain controller, allowed admin group
 			components = output.split("\r");
 			forest = components[0].split("=")[1].trim();
 			return forest;
